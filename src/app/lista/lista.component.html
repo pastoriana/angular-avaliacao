@@ -1,0 +1,33 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Perfil</th>
+        <th>Idade</th>
+        <th>E-mail</th>
+        <th>Ativo</th>
+        <th>País</th>
+        <th>Nível de Experiência</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of people">
+        <td>{{ pessoa.id }}</td>
+        <td>{{ pessoa.nome }}</td>
+        <td>{{ pessoa.perfil }}</td>
+        <td>{{ pessoa.idade }}</td>
+        <td>{{ pessoa.email }}</td>
+        <td>{{ pessoa.ativo ? 'Sim' : 'Não' }}</td>
+        <td>{{ pessoa.pais }}</td>
+        <td>{{ pessoa.experiencia }}</td>
+        <td>
+          <a [routerLink]="['/edit', pessoa.id]" class="btn btn-primary btn-sm">Editar</a>
+          <button (click)="deletePessoa(pessoa.id)" class="btn btn-danger btn-sm">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a routerLink="/add" class="btn btn-success">Adicionar Pessoa</a>
+  
