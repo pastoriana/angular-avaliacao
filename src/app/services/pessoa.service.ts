@@ -7,30 +7,19 @@ import { Pessoa } from '../models/pessoa.model';
   providedIn: 'root'
 })
 export class PessoaService {
-  private apiUrl = 'http://localhost:3000/profiles';
+  private apiUrl = 'http://localhost:3000/profiles'; // URL para o db.json
 
   constructor(private http: HttpClient) {}
 
-  getPessoas(): Observable<Pessoa[]> {
-    return this.http.get<Pessoa[]>(this.apiUrl);
-  }
-
-  createPessoa(pessoa: Pessoa): Observable<Pessoa> {
-    return this.http.post<Pessoa>(this.apiUrl, pessoa);
-  }
-
   getPessoaById(id: string): Observable<Pessoa> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Pessoa>(url);
+    return this.http.get<Pessoa>(`${this.apiUrl}/${id}`);
   }
 
   updatePessoa(id: string, pessoa: Pessoa): Observable<Pessoa> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.put<Pessoa>(url, pessoa);
+    return this.http.put<Pessoa>(`${this.apiUrl}/${id}`, pessoa);
   }
-
-  deletePessoa(id: string): Observable<void> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<void>(url);
+  
+  create(pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.post<Pessoa>(this.apiUrl, pessoa);
   }
 }

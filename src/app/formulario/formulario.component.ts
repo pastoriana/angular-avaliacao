@@ -9,14 +9,14 @@ import { PessoaService } from '../services/pessoa.service';
   styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent {
-  personForm: FormGroup;
+  pessoaForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private personService: PessoaService,
+    private pessoaService: PessoaService,
     private router: Router
   ) {
-    this.personForm = this.fb.group({
+    this.pessoaForm = this.fb.group({
       nome: ['', Validators.required],
       perfil: ['', Validators.required],
       idade: ['', [Validators.required, Validators.min(0)]],
@@ -28,11 +28,10 @@ export class FormularioComponent {
   }
 
   onSubmit(): void {
-    if (this.personForm.valid) {
-      this.personService.create(this.personForm.value).subscribe(() => {
+    if (this.pessoaForm.valid) {
+      this.pessoaService.create(this.pessoaForm.value).subscribe(() => {
         this.router.navigate(['/']);
       });
     }
   }
 }
-

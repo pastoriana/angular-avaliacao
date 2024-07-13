@@ -20,13 +20,13 @@ export class EditarComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.pessoaForm = this.fb.group({
-      name: ['', Validators.required],
-      role: ['', Validators.required],
-      age: ['', [Validators.required, Validators.min(0)]],
+      nome: ['', Validators.required],
+      perfil: ['', Validators.required],
+      idade: ['', [Validators.required, Validators.min(0)]],
       email: ['', [Validators.required, Validators.email]],
-      isActive: [false],
-      country: [''],
-      experience: ['']
+      ativo: [false],
+      pais: [''],
+      experiencia: ['']
     });
   }
 
@@ -42,7 +42,7 @@ export class EditarComponent implements OnInit {
   onSubmit(): void {
     if (this.pessoaForm.valid) {
       this.pessoaService.updatePessoa(this.pessoaId, this.pessoaForm.value).subscribe(() => {
-        this.router.navigate(['/persons']);
+        this.router.navigate(['/']);
       });
     }
   }
