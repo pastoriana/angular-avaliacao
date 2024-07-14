@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PessoaService } from '../services/pessoa.service';
 import { Pessoa } from '../models/pessoa.model';
+import { PessoaService } from '../services/pessoa.service';
 
 @Component({
   selector: 'app-lista',
@@ -13,14 +13,18 @@ export class ListaComponent implements OnInit {
   constructor(private pessoaService: PessoaService) {}
 
   ngOnInit(): void {
-    this.pessoaService.getAll().subscribe((data: Pessoa[]) => {
-      this.pessoas = data;
+    this.loadPessoas();
+  }
+
+  loadPessoas(): void {
+    this.pessoaService.getAll().subscribe(pessoas => {
+      this.pessoas = pessoas;
     });
   }
 
-  deletePessoa(id: string): void {
+  deletePessoa(id: number): void {
     this.pessoaService.delete(id).subscribe(() => {
-      this.pessoas = this.pessoas.filter(pessoa => pessoa.id !== id);
+      this.loadPessoas();
     });
   }
 }

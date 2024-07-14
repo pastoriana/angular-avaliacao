@@ -7,27 +7,30 @@ import { Pessoa } from '../models/pessoa.model';
   providedIn: 'root'
 })
 export class PessoaService {
-  private apiUrl = 'http://localhost:3000/pessoas';
+  private apiUrl = 'http://localhost:3000/db.jason';
 
   constructor(private http: HttpClient) {}
 
-  getAllPessoas(): Observable<Pessoa[]> {
+  getAll(): Observable<Pessoa[]> {
     return this.http.get<Pessoa[]>(this.apiUrl);
   }
 
-  getPessoaById(id: number): Observable<Pessoa> {
-    return this.http.get<Pessoa>(`${this.apiUrl}/${id}`);
+  getById(id: string): Observable<Pessoa> {
+    const numericId = +id; // Converte a string para número usando +
+    const url = `${this.apiUrl}/${numericId}`;
+    return this.http.get<Pessoa>(url);
   }
 
-  createPessoa(pessoa: Pessoa): Observable<Pessoa> {
+  create(pessoa: Pessoa): Observable<Pessoa> {
     return this.http.post<Pessoa>(this.apiUrl, pessoa);
   }
 
-  updatePessoa(id: number, pessoa: Pessoa): Observable<Pessoa> {
-    return this.http.put<Pessoa>(`${this.apiUrl}/${id}`, pessoa);
+  update(id: number, pessoa: Pessoa): Observable<Pessoa> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put<Pessoa>(url, pessoa);
   }
 
-  deletePessoa(id: number): Observable<void> {
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

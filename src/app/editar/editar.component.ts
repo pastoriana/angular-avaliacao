@@ -41,7 +41,8 @@ export class EditarComponent implements OnInit {
 
   onSubmit(): void {
     if (this.pessoaForm.valid) {
-      this.pessoaService.update(this.pessoaId, this.pessoaForm.value).subscribe(() => {
+      const id = parseInt(this.pessoaId, 10); // Converter string para número
+      this.pessoaService.update(id, this.pessoaForm.value).subscribe(() => {
         this.router.navigate(['/']);
       });
     }
