@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { PessoaService } from '../services/pessoa.service';
+import { Pessoa } from '../models/pessoa.model';
 
 @Component({
-  selector: 'app-person-list',
+  selector: 'app-lista',
   templateUrl: './lista.component.html',
   styleUrls: ['./lista.component.css']
 })
 export class ListaComponent implements OnInit {
-  people: any[] = [];
+  pessoas: Pessoa[] = [];
 
-  constructor(private pessoaService: PessoaService) { }
+  constructor(private pessoaService: PessoaService) {}
 
   ngOnInit(): void {
-    this.pessoaService.getAll().subscribe(data => {
-      this.people = data;
+    this.pessoaService.getAll().subscribe((data: Pessoa[]) => {
+      this.pessoas = data;
     });
   }
 
-  deletePerson(id: string): void {
-    if (confirm('Tem certeza que deseja excluir esta pessoa?')) {
-      this.pessoaService.delete(id).subscribe(() => {
-        this.people = this.people.filter(person => person.id !== id);
-      });
-    }
+  deletePessoa(id: string): void {
+    this.pessoaService.delete(id).subscribe(() => {
+      this.pessoas = this.pessoas.filter(pessoa => pessoa.id !== id);
+    });
   }
 }

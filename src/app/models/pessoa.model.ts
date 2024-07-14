@@ -1,10 +1,10 @@
 export interface Pessoa {
-  id: string;
+  id: number;
   nome: string;
   perfil: string;
   idade: number;
-  email?: string;
-  ativo?: boolean;
-  pais?: string;
-  experiencia?: string;
+  email: string;
+  ativo: boolean;
+  pais: string;
+  experiencia: string;
 }

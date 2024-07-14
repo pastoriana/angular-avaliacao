@@ -33,7 +33,7 @@ export class EditarComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.pessoaId = params.get('id')!;
-      this.pessoaService.getPessoaById(this.pessoaId).subscribe((pessoa: Pessoa) => {
+      this.pessoaService.getById(this.pessoaId).subscribe((pessoa: Pessoa) => {
         this.pessoaForm.patchValue(pessoa);
       });
     });
@@ -41,7 +41,7 @@ export class EditarComponent implements OnInit {
 
   onSubmit(): void {
     if (this.pessoaForm.valid) {
-      this.pessoaService.updatePessoa(this.pessoaId, this.pessoaForm.value).subscribe(() => {
+      this.pessoaService.update(this.pessoaId, this.pessoaForm.value).subscribe(() => {
         this.router.navigate(['/']);
       });
     }
