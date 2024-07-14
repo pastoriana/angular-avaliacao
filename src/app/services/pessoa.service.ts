@@ -7,7 +7,7 @@ import { Pessoa } from '../models/pessoa.model';
   providedIn: 'root'
 })
 export class PessoaService {
-  private apiUrl = 'http://localhost:3000/db.jason';
+  private apiUrl = 'http://localhost:3000/db.json';
 
   constructor(private http: HttpClient) {}
 
